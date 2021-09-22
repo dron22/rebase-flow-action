@@ -1,0 +1,10 @@
+name: 'Rebase flow check'
+description: 'Validates is current branch is rebased on target branch'
+inputs:
+  target-branch:
+    description: 'Name of the target branch'
+    required: true
+    default: 'main'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
