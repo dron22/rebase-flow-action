@@ -7,6 +7,11 @@ Github action for beautiful commit history :heart:
 ## Usage
 
 ```yaml
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
 jobs:
   ensure-rebase-flow:
     name: Run rebase-flow-action
