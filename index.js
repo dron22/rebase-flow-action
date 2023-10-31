@@ -12,8 +12,7 @@ async function run() {
     const commitsMain = commitsMainOutput.split('\n');
 
     // fetch current branch commits
-    const currentBanch = await executeFunction('git', ['branch'])
-    const commitsCurrentOutput = await executeFunction('git', ['rev-list', '--first-parent', currentBanch]);
+    const commitsCurrentOutput = await executeFunction('git', ['rev-list', '--first-parent', 'HEAD']);
     const commitsCurrent = commitsCurrentOutput.split('\n');
 
     // compare oldest ancestor and head of target
@@ -21,6 +20,7 @@ async function run() {
     const headOfMain = await executeFunction('git', ['rev-parse', targetBranchFullPath]);
 
     if (oldestAncestor !== headOfMain) {
+      const currentBanch = await executeFunction('git', ['branch']);
       core.setFailed(`Current branch '${currentBanch}' needs to be rebased on target branch '${targetBranch}'`);
     }
   } catch (error) {
